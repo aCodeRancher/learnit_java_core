@@ -9,10 +9,9 @@ public class SportsCar extends CarDecorator {
 	}
 
 	@Override
-	public void drive() {
-		super.drive();
-		System.out.print(" And drives fast like a Sports Car");
-	}
+	public String drive() {
+		 return super.drive().concat(this.getMessage());
+	 }
 	
 	public void setTransmissionMode(String transmissionMode) {
 		this.transmissionMode = transmissionMode;

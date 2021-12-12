@@ -1,6 +1,16 @@
 package com.itbulls.learnit.javacore.patterns.structural.decorator;
 
-public interface Car {
+public abstract class Car {
 
-	void drive();
+	protected String message;
+
+	public abstract String drive();
+
+	public  String getMessage(){
+		return this.message;
+	}
+
+	public void setMessage(String message){
+		  this.message = message;
+	}
 }
