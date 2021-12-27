@@ -1,6 +1,7 @@
 package com.itbulls.learnit.javacore.patterns.structural.composite;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public interface Shape {
     public int getX();
@@ -13,4 +14,5 @@ public interface Shape {
     public void unSelect();
     public Boolean isSelected();
     public void paint(Graphics graphics);
+    public Iterator<Shape> createIterator();
 }
