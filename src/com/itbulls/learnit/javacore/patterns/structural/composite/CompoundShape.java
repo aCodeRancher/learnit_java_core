@@ -3,6 +3,7 @@ package com.itbulls.learnit.javacore.patterns.structural.composite;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class CompoundShape extends BaseShape {
@@ -137,4 +138,10 @@ public class CompoundShape extends BaseShape {
             child.paint(graphics);
         }
     }
+
+   public Iterator<Shape> createIterator(){
+        return new CompositeIterator(children.iterator());
+   }
+
+
 }
