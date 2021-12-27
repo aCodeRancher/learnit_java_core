@@ -1,6 +1,7 @@
 package com.itbulls.learnit.javacore.patterns.structural.composite;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public abstract class BaseShape implements Shape {
     public int x;
@@ -90,5 +91,9 @@ public abstract class BaseShape implements Shape {
         }
 
         // ...
+    }
+
+    public Iterator<Shape> createIterator(){
+         return new NullIterator();
     }
 }
