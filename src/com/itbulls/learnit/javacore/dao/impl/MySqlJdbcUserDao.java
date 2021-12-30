@@ -1,6 +1,5 @@
 package com.itbulls.learnit.javacore.dao.impl;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import com.itbulls.learnit.javacore.dao.RoleDao;
@@ -90,5 +89,18 @@ public class MySqlJdbcUserDao implements UserDao {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void deleteUserById(int id) {
+		try (var conn = DBUtils.getConnection();
+			  var ps = conn.prepareStatement("DELETE FROM user WHERE id = ?")) {
+			   ps.setInt(1, id);
+			   ps.executeUpdate();
+          } catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 }

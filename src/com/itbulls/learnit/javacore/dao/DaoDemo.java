@@ -16,18 +16,20 @@ public class DaoDemo {
 		System.out.println(userDao.getUserByEmail(user.getEmail()));
 		
 		
-		UserDto newUser = new UserDto();
+	 	UserDto newUser = new UserDto();
 		newUser.setFirstName("Evheniy");
 		newUser.setLastName("Kachanov");
 		newUser.setEmail("e.kachanov@email.com");
 		newUser.setMoney(BigDecimal.valueOf(1000));
 		
 		userDao.saveUser(newUser);
-		
-		System.out.println(userDao.getUserByEmail("e.kachanov@email.com"));
-		
-		
-		
-	}
+		 System.out.println(userDao.getUserByEmail("e.kachanov@email.com"));
+
+		System.out.println("delete this user... ");
+		UserDto foundUser = userDao.getUserByEmail("e.kachanov@email.com");
+		int foundID = foundUser.getId();
+		System.out.println("delete this user id:  " + foundID);
+		userDao.deleteUserById(foundID);
+	 }
 
 }
