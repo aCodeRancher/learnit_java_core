@@ -1,7 +1,5 @@
 package com.itbulls.learnit.javacore.patterns.structural.flyweight;
 
-import java.awt.Graphics;
-
 public class Tree {
 	private int x;
 	private int y;
@@ -13,7 +11,15 @@ public class Tree {
 		this.type = type;
 	}
 
-	public void draw(Graphics g) {
-		type.draw(g, x, y);
+	public TreeType getType(){
+		return this.type;
 	}
+
+	public int getX(){
+		return this.x;
+	}
+	public int getY(){
+		return this.y;
+	}
+
 }
