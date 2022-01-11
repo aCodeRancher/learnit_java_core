@@ -1,9 +1,9 @@
-package com.itbulls.learnit.javacore.dao.impl;
+package com.itbulls.learnit.javacore.dao.hw.template.dao;
 
 import java.sql.SQLException;
 
-import com.itbulls.learnit.javacore.dao.RoleDao;
-import com.itbulls.learnit.javacore.dao.dto.RoleDto;
+import com.itbulls.learnit.javacore.dao.hw.template.dto.RoleDto;
+
 import com.itbulls.learnit.javacore.jdbc.DBUtils;
 
 public class MySqlJdbcRoleDao implements RoleDao {

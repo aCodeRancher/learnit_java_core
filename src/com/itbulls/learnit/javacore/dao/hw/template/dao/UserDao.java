@@ -1,6 +1,6 @@
-package com.itbulls.learnit.javacore.dao;
+package com.itbulls.learnit.javacore.dao.hw.template.dao;
 
-import com.itbulls.learnit.javacore.dao.dto.UserDto;
+import com.itbulls.learnit.javacore.dao.hw.template.dto.UserDto;
 
 public interface UserDao {
 	

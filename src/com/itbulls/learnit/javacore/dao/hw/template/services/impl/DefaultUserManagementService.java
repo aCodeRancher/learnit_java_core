@@ -3,11 +3,13 @@ package com.itbulls.learnit.javacore.dao.hw.template.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.itbulls.learnit.javacore.dao.hw.template.dao.MySqlJdbcUserDao;
+import com.itbulls.learnit.javacore.dao.hw.template.dto.converter.UserConverter;
 import com.itbulls.learnit.javacore.dao.hw.template.enteties.User;
 import com.itbulls.learnit.javacore.dao.hw.template.enteties.impl.DefaultUser;
 import com.itbulls.learnit.javacore.dao.hw.template.services.UserManagementService;
 import com.itbulls.learnit.javacore.dao.hw.template.storage.impl.DefaultUserStoringService;
-
+import com.itbulls.learnit.javacore.dao.hw.template.dto.UserDto;
 
 public class DefaultUserManagementService implements UserManagementService {
 	
@@ -17,9 +19,14 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	private static DefaultUserManagementService instance;
 	private static DefaultUserStoringService defaultUserStoringService;
-	
+	private static UserConverter userConverter;
+	private static MySqlJdbcUserDao mySqlJdbcUserDao;
+
+
 	static {
 		defaultUserStoringService = DefaultUserStoringService.getInstance();
+		userConverter = UserConverter.getInstance();
+		mySqlJdbcUserDao = MySqlJdbcUserDao.getInstance();
 	}
 
 	private DefaultUserManagementService() {
@@ -27,33 +34,15 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	@Override
 	public String registerUser(User user) {
-		if (user == null) {
-			return NO_ERROR_MESSAGE;
-		}
-		
-		String errorMessage = checkUniqueEmail(user.getEmail());
-		if (errorMessage != null && !errorMessage.isEmpty()) {
-			return errorMessage;
-		}
-		
-		defaultUserStoringService.saveUser(user);
+
+
+        UserDto userDto = userConverter.userToUserDto(user);
+		mySqlJdbcUserDao.saveUser(userDto);
+
 		return NO_ERROR_MESSAGE;
 	}
 
-	private String checkUniqueEmail(String email) {
-		List<User> users = defaultUserStoringService.loadUsers();
-		if (email == null || email.isEmpty()) {
-			return EMPTY_EMAIL_ERROR_MESSAGE;
-		}
-		for (User user : users) {
-			if (user != null && 
-					user.getEmail() != null &&
-					user.getEmail().equalsIgnoreCase(email)) {
-				return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
-			}
-		}
-		return NO_ERROR_MESSAGE;
-	}
+
 
 	public static UserManagementService getInstance() {
 		if (instance == null) {
@@ -74,21 +63,8 @@ public class DefaultUserManagementService implements UserManagementService {
 
 	@Override
 	public User getUserByEmail(String userEmail) {
-		for (User user : defaultUserStoringService.loadUsers()) {
-			if (user != null && user.getEmail().equalsIgnoreCase(userEmail)) {
-				return user;
-			}
-		}
-		return null;
+	     UserDto userDto = mySqlJdbcUserDao.getUserByEmail(userEmail);
+	     return userConverter.userDtoToUser(userDto);
 	}
-	
-	
-//	// Stream API version of the method
-//	@Override
-//	public User[] getUsers() {
-//		return Arrays.stream(users)
-//				.filter(Objects::nonNull)
-//				.toArray(User[]::new);
-//	}
 
 }

@@ -1,19 +1,25 @@
-package com.itbulls.learnit.javacore.dao.impl;
+package com.itbulls.learnit.javacore.dao.hw.template.dao;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
-import com.itbulls.learnit.javacore.dao.RoleDao;
-import com.itbulls.learnit.javacore.dao.UserDao;
-import com.itbulls.learnit.javacore.dao.dto.UserDto;
 import com.itbulls.learnit.javacore.jdbc.DBUtils;
+import com.itbulls.learnit.javacore.dao.hw.template.dto.UserDto;
 
 public class MySqlJdbcUserDao implements UserDao {
 	
 	private RoleDao roleDao;
-	
+	private static MySqlJdbcUserDao  instance;
 	{
 		roleDao = new MySqlJdbcRoleDao();
+	}
+
+	private MySqlJdbcUserDao() {}
+
+	public static MySqlJdbcUserDao getInstance(){
+		if (instance == null) {
+			instance = new MySqlJdbcUserDao();
+		}
+		return instance;
 	}
 
 	@Override
@@ -58,6 +64,7 @@ public class MySqlJdbcUserDao implements UserDao {
 					user.setRole(roleDao.getRoleById(rs.getInt("fk_user_role")));
 					user.setMoney(rs.getBigDecimal("money"));
 					user.setCreditCard(rs.getString("credit_card"));
+					user.setPassword(rs.getString("password"));
 					return user;
 				}
 			}
@@ -72,7 +79,7 @@ public class MySqlJdbcUserDao implements UserDao {
 	public void saveUser(UserDto user) {
 		try (var conn = DBUtils.getConnection();
 				var ps = conn.prepareStatement("INSERT INTO user (first_name, last_name, email, fk_user_role, "
-						+ "money, credit_card) VALUES (?, ?, ?, ?, ?, ?);")) {
+						+ "money, credit_card,password) VALUES (?, ?, ?, ?, ?, ?, ?);")) {
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
 			ps.setString(3, user.getEmail());
@@ -83,7 +90,7 @@ public class MySqlJdbcUserDao implements UserDao {
 			}
 			ps.setBigDecimal(5, user.getMoney());
 			ps.setString(6, user.getCreditCard());
-			
+			ps.setString(7,user.getPassword());
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
