@@ -97,5 +97,16 @@ public class MySqlJdbcUserDao implements UserDao {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void updateUser(UserDto user) {
+		try (var conn = DBUtils.getConnection();
+			 var ps = conn.prepareStatement("update user set password=? where email=?")){
+			ps.setString(1, user.getPassword());
+			ps.setString(2, user.getEmail());
+			ps.executeUpdate();
+    	} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
