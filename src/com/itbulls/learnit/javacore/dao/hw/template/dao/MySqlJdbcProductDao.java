@@ -24,7 +24,7 @@ public class MySqlJdbcProductDao implements ProductDao {
     @Override
     public ProductDto getProductById(int id) {
         try (var conn = DBUtils.getConnection();
-             var ps = conn.prepareStatement("SELECT * FROM product WHERE id = ?")) {
+             var ps = conn.prepareStatement("SELECT * FROM product WHERE product_id = ?")) {
              ps.setInt(1, id);
             try (var rs = ps.executeQuery()) {
                 if (rs.next()) {

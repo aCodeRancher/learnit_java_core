@@ -8,8 +8,11 @@ public interface Order extends Serializable {
 	boolean isCreditCardNumberValid(String userInput);
 
 	void setCreditCardNumber(String userInput);
+	String getCreditCardNumber();
 
-	void setProducts(List<Product> products);
+	void setProduct_id(int product_id);
+
+	int getProduct_id();
 
 	void setCustomerId(int customerId);
 	

@@ -1,9 +1,11 @@
 package com.itbulls.learnit.javacore.dao.hw.template.menu.impl;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.itbulls.learnit.javacore.dao.hw.template.configs.ApplicationContext;
 import com.itbulls.learnit.javacore.dao.hw.template.enteties.Order;
+import com.itbulls.learnit.javacore.dao.hw.template.enteties.Product;
 import com.itbulls.learnit.javacore.dao.hw.template.enteties.impl.DefaultOrder;
 import com.itbulls.learnit.javacore.dao.hw.template.menu.Menu;
 import com.itbulls.learnit.javacore.dao.hw.template.services.OrderManagementService;
@@ -45,9 +47,13 @@ public class CheckoutMenu implements Menu {
 		}
 		
 		order.setCreditCardNumber(creditCardNumber);
-		order.setProducts(context.getSessionCart().getProducts());
-		order.setCustomerId(context.getLoggedInUser().getId());
-		orderManagementService.addOrder(order);
+		Iterator<Product> productIterator= context.getSessionCart().getProducts().iterator();
+		while (productIterator.hasNext()) {
+			Product productToBuy = productIterator.next();
+			order.setProduct_id(productToBuy.getId());
+			order.setCustomerId(context.getLoggedInUser().getId());
+			orderManagementService.addOrder(order);
+		}
 		return true;
 	}
 

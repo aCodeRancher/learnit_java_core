@@ -1,10 +1,7 @@
 package com.itbulls.learnit.javacore.dao.hw.template.enteties.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.itbulls.learnit.javacore.dao.hw.template.enteties.Order;
-import com.itbulls.learnit.javacore.dao.hw.template.enteties.Product;
+
 
 
 public class DefaultOrder implements Order {
@@ -12,7 +9,7 @@ public class DefaultOrder implements Order {
 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 	
 	private String creditCardNumber;
-	private List<Product> products;
+	private int product_id;
 	private int customerId;
 
 	@Override
@@ -29,9 +26,18 @@ public class DefaultOrder implements Order {
 		this.creditCardNumber = creditCardNumber;
 	}
 
+	public String getCreditCardNumber(){
+		return this.creditCardNumber;
+	}
+
 	@Override
-	public void setProducts(List<Product> products) {
-		this.products = new ArrayList<>(products);
+	public void setProduct_id ( int product_id ) {
+		this.product_id = product_id;
+	}
+
+	@Override
+	public int getProduct_id(){
+		return this.product_id;
 	}
 
 	@Override
@@ -49,11 +55,8 @@ public class DefaultOrder implements Order {
 	public String toString() {
 		return "Order: customer id - " + this.customerId + "\t" +
 					"credit card number - " + this.creditCardNumber + "\t" + 
-					"products - " + this.products;
+					"product - " + this.product_id;
 	}
 
-	
-	
-	
 
 }
