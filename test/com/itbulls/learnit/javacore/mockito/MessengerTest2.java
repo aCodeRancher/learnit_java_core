@@ -276,10 +276,12 @@ public class MessengerTest2 {
     	var client = new Client(RANDOM_EMAIL);
     	var template = new Template();
 
-        var validator = mailServerMock.getValidator();
+        //var validator = mailServerMock.getValidator();
         
         // this line will throw NPE without DEEP STUBS
-        validator.validate(new Email());
+       // validator.validate(new Email());
+        when(mailServerMock.getValidator().validate(any(Email.class))).thenReturn(true);
+        assertTrue(mailServerMock.getValidator().validate(new Email()));
     }
     
     @Test
@@ -363,7 +365,7 @@ public class MessengerTest2 {
     	List<Integer> spy = spy(listInts);
     	
     	// OutOfBoundsException because get method is called on real list that is empty
-//    	when(spy.get(0)).thenReturn(0); 
+    	//when(spy.get(0)).thenReturn(0);
     	
     	doReturn(0).when(spy).get(0);
     	System.out.println(spy.get(0));
