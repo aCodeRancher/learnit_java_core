@@ -288,12 +288,15 @@ public class MessengerTest2 {
     void additionalMatchersDemo() {
     	List<String> listMock = mock(List.class);
     	
-//    	when(listMock.get(or(eq(1), eq(2)))).thenReturn("more");
-//    	when(listMock.get(gt(2))).thenThrow(new RuntimeException());
-//    	
-//    	System.out.println(listMock.get(1)); // more is returned
-//    	System.out.println(listMock.get(2)); // more is returned
-//    	System.out.println(listMock.get(3)); // RuntimeException is thrown
+    	when(listMock.get(or(eq(1), eq(2)))).thenReturn("more");
+    	when(listMock.get(gt(2))).thenThrow(new RuntimeException());
+
+    	assertTrue(listMock.get(1).equals("more"));
+    	assertTrue(listMock.get(2).equals("more"));
+    	assertThrows( RuntimeException.class, ()->listMock.get(3));
+  	  // System.out.println(listMock.get(1)); // more is returned
+     	//System.out.println(listMock.get(2)); // more is returned
+    //	System.out.println(listMock.get(3)); // RuntimeException is thrown
 
     	
     	/* There are other matchers, such as:
