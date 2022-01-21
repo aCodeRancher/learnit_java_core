@@ -18,10 +18,10 @@ public class DaemonThreadDemo {
 			}
 		});
 		
-//		t1.setDaemon(true);
+ 		t1.setDaemon(true);
 		t1.start();
 		
-		TimeUnit.SECONDS.sleep(2);
+		TimeUnit.SECONDS.sleep(5);
 		System.out.println("Main thread finished");
 		
 	}
