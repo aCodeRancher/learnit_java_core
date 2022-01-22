@@ -8,6 +8,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -131,7 +132,7 @@ class ClassWithStaticMethodExample {
 	}
 
 	public static int getNumber() {
-		System.out.println(5 / 0);
+		//System.out.println(5 / 0);
 		return 1;
 	}
 	
