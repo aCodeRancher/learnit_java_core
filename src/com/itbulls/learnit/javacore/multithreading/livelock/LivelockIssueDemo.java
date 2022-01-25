@@ -68,6 +68,7 @@ public class LivelockIssueDemo {
 				if (spouse.isHungry()) {
 					System.out.printf("%s: You eat first my darling %s!%n", name, spouse.getName());
 					spoon.setOwner(spouse);
+					System.out.println(" Who has the spoon now ? " + spoon.getOwner().getName());
 					continue;
 				}
 
