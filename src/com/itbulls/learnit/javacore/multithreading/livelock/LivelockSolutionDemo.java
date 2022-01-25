@@ -21,6 +21,7 @@ public class LivelockSolutionDemo {
 	static class Spoon {
 		private Spouse owner;
 
+		private volatile int spoonYieldTime;
 		public Spoon(Spouse spouse) {
 			owner = spouse;
 		}
@@ -36,12 +37,19 @@ public class LivelockSolutionDemo {
 		public synchronized void use() {
 			System.out.printf("%s has eaten!%n", owner.name);
 		}
+
+		public int getSpoonYieldTime(){
+			return spoonYieldTime;
+		}
+		public void incSpoonYieldTime(){
+			spoonYieldTime++;
+		}
 	}
 
 	static class Spouse {
 		private String name;
 		private boolean isHungry;
-		private int spoonYieldTimes;
+
 		private int spoonYieldLimit;
 
 		public Spouse(String name) {
@@ -49,6 +57,7 @@ public class LivelockSolutionDemo {
 			this.isHungry = true;
 			this.spoonYieldLimit = 1;
 		}
+
 
 		public String getName() {
 			return name;
@@ -71,12 +80,13 @@ public class LivelockSolutionDemo {
 				}
 
 				// If spouse is hungry, insist upon passing the spoon.
-				if (spouse.isHungry() && spoonYieldTimes < spoonYieldLimit) {
-					System.out.printf("%s: You eat first my darling %s!%n", name, spouse.getName());
-					spoon.setOwner(spouse);
-					spoonYieldTimes++;
-					continue;
-				}
+
+					   if (spouse.isHungry() && spoon.getSpoonYieldTime() < spoonYieldLimit) {
+						   System.out.printf("%s: You eat first my darling %s!%n", name, spouse.getName());
+						   spoon.setOwner(spouse);
+						   spoon.incSpoonYieldTime();
+						   continue;
+					   }
 
 				// Spouse wasn't hungry, so finally eat
 				spoon.use();
