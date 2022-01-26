@@ -8,18 +8,19 @@ public class ScheduledThreadPoolDemo {
 
 	public static void main(String[] args) {
 		var es = Executors.newScheduledThreadPool(4);
+		System.out.println("main thread " + System.currentTimeMillis());
 		es.schedule(() -> System.out.println("Schedule example 1 : " +
-							Thread.currentThread().getName() + System.currentTimeMillis()), 1, TimeUnit.SECONDS);
-		es.schedule(() -> System.out.println("Schedule example 2: " +
-				Thread.currentThread().getName()+ System.currentTimeMillis() ), 1, TimeUnit.SECONDS);
+							Thread.currentThread().getName() + " : " + System.currentTimeMillis()), 1, TimeUnit.SECONDS);
+		es.schedule(() -> System.out.println("Schedule example 2 : " +
+				Thread.currentThread().getName()+ " : "+System.currentTimeMillis() ), 1, TimeUnit.SECONDS);
 		es.schedule(() -> System.out.println("Schedule example 3 : " +
-				Thread.currentThread().getName()+  System.currentTimeMillis()), 1, TimeUnit.SECONDS);
-		es.schedule(() -> System.out.println("Schedule example 4: " +
-				Thread.currentThread().getName()+ System.currentTimeMillis()), 1, TimeUnit.SECONDS);
-		es.schedule(() -> System.out.println("Schedule example 5: " +
-				Thread.currentThread().getName()+ System.currentTimeMillis()), 1, TimeUnit.SECONDS);
+				Thread.currentThread().getName()+ " : " +System.currentTimeMillis()), 1, TimeUnit.SECONDS);
+		es.schedule(() -> System.out.println("Schedule example 4 : " +
+				Thread.currentThread().getName()+" : " +  System.currentTimeMillis()), 1, TimeUnit.SECONDS);
+		es.schedule(() -> System.out.println("Schedule example 5 : " +
+				Thread.currentThread().getName()+ " : " + System.currentTimeMillis()), 1, TimeUnit.SECONDS);
 		es.shutdown();
-		
+		System.out.println("main thread " + System.currentTimeMillis());
 		
 	}
 	
