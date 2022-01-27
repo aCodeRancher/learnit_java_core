@@ -31,6 +31,7 @@ public class ThreadGroupDemo {
 				TimeUnit.MILLISECONDS.sleep(500);
 				System.out.println(Thread.currentThread().getName());
 			} catch (InterruptedException e) {
+				System.out.println(Thread.currentThread().getName() + " is interrupted.");
 				break;
 			}
 			
