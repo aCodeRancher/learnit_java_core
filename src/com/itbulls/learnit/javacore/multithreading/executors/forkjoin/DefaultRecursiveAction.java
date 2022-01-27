@@ -34,11 +34,12 @@ public class DefaultRecursiveAction extends RecursiveAction {
 	private List<DefaultRecursiveAction> createSubtasks() {
 		List<DefaultRecursiveAction> subtasks = new ArrayList<>();
 
-		DefaultRecursiveAction subtask1 = new DefaultRecursiveAction(this.workload / 2);
-		DefaultRecursiveAction subtask2 = new DefaultRecursiveAction(this.workload / 2);
-
+		DefaultRecursiveAction subtask1 = new DefaultRecursiveAction(this.workload / 3);
+		DefaultRecursiveAction subtask2 = new DefaultRecursiveAction(this.workload / 3);
+		DefaultRecursiveAction subtask3 = new DefaultRecursiveAction(this.workload / 3);
 		subtasks.add(subtask1);
 		subtasks.add(subtask2);
+		subtasks.add(subtask3);
 
 		return subtasks;
 	}
