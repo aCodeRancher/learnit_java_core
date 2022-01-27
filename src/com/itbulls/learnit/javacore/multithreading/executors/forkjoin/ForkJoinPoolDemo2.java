@@ -7,7 +7,7 @@ public class ForkJoinPoolDemo2 {
 	public static void main(String[] args) {
 		var pool = new ForkJoinPool();
 		
-		var result = pool.invoke(new DefaultRecursiveTask(40));
+		var result = pool.invoke(new DefaultRecursiveTask1(104));
 		System.out.println("Result: " + result);
 		
 	}
