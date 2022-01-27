@@ -11,7 +11,7 @@ public class ForkJoinPoolDemo {
 		
 		ForkJoinPool forkJoinPool2 = new ForkJoinPool();
 		
-		forkJoinPool2.invoke(new DefaultRecursiveAction(32));
+		forkJoinPool2.invoke(new DefaultRecursiveAction(36));
 
 	}
 
