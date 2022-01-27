@@ -21,13 +21,13 @@ public class DefaultRecursiveAction extends RecursiveAction {
 		} else {
 			System.out.println("Splitting workLoad in thread " + Thread.currentThread().getName()
 					+ " with workload: " + this.workload);
-			List<DefaultRecursiveAction> subtasks = new ArrayList<>(createSubtasks());
-			for (RecursiveAction subtask : subtasks) {
-				subtask.fork();
-			}
+			//List<DefaultRecursiveAction> subtasks = new ArrayList<>(createSubtasks());
+			//for (RecursiveAction subtask : subtasks) {
+			//	subtask.fork();
+			//}
 			
 			// Alternatively we may call next method
-//			ForkJoinTask.invokeAll(createSubtasks());
+			ForkJoinTask.invokeAll(createSubtasks());
 		}
 	}
 
