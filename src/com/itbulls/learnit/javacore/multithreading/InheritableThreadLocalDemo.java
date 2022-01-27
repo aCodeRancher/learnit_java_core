@@ -20,8 +20,8 @@ public class InheritableThreadLocalDemo {
 
 			Thread childThread = new Thread(() -> {
 				System.out.println("***** ChildThread *****");
-				System.out.println(threadLocal.get());
-				System.out.println(inheritableThreadLocal.get());
+				System.out.println("--child thread thread local:"+threadLocal.get());
+				System.out.println("--child thread inheritable thread "+ inheritableThreadLocal.get());
 			});
 			childThread.start();
 		});
