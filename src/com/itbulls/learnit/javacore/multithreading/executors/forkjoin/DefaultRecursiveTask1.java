@@ -18,14 +18,14 @@ public class DefaultRecursiveTask1  extends RecursiveTask<Integer> {
         if (this.workload < 18) {
             System.out.println("Doing workLoad myself in thread " + Thread.currentThread().getName()
                     + " with workload: " + this.workload);
-            return  workload;
+            return  workload*2;
         } else {
             System.out.println("Splitting workLoad in thread " + Thread.currentThread().getName()
                     + " with workload: " + this.workload);
 
 
             return ForkJoinTask.invokeAll(createSubtasks()).stream()
-                    .mapToInt(ForkJoinTask::join).sum();
+                    .mapToInt(ForkJoinTask::join).sum() ;
 
         }
 
