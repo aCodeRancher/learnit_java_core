@@ -12,7 +12,7 @@ public class Demo4 {
 			System.out.println("Request User ID from external API...");
 			return 1234;
 		}).thenApply((result) -> {
-			System.out.println("Requst total number of purchases in other service by ID...");
+			System.out.println("Requst total number of purchases in other service by ID "+ result);
 			return 150;
 		});
 		
@@ -23,7 +23,7 @@ public class Demo4 {
 			System.out.println("Request User ID from external API...");
 			return 1234;
 		}).thenApplyAsync((result) -> {
-			System.out.println("Requst total number of purchases in other service by ID...");
+			System.out.println("Requst total number of purchases in other service by ID " + result);
 			return 150;
 		}, es);
 		
