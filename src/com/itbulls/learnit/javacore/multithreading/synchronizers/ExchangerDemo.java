@@ -27,11 +27,28 @@ public class ExchangerDemo {
 	        	 e.printStackTrace();
 	        }
 	    };
-	    
+
+		Runnable task3 = () -> {
+			try {
+				String msg = exchanger.exchange("Message from Task #3");
+				System.out.println("Received from another thread in task #3 : " + msg);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
+		Runnable task4 = () -> {
+			try {
+				String msg = exchanger.exchange("Message from Task #4");
+				System.out.println("Received from another thread in task #4 : " + msg);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
 	    var es = Executors.newCachedThreadPool();
 	    es.submit(task1);
 	    es.submit(task2);
-	    
+	    es.submit(task3);
+	    es.submit(task4);
 	    es.shutdown();
 	}
 
