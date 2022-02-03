@@ -2,12 +2,23 @@ package com.itbulls.learnit.javacore.multithreading.locks;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReentrantReadWriteLockDemo {
-	
+
+
+    public static void main (String... args){
+      var es=  Executors.newFixedThreadPool(2);
+      ReentrantReadWriteLockDemo demo = new ReentrantReadWriteLockDemo();
+      es.submit(() -> demo.put("k" ,"v") );
+      es.submit(() -> System.out.println(demo.get("k")));
+      es.shutdown();
+    }
+
 	private Map<String, String> syncHashMap = new HashMap<>();
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     
@@ -17,8 +28,11 @@ public class ReentrantReadWriteLockDemo {
     public void put(String key, String value) {
         try {
             writeLock.lock();
+            TimeUnit.SECONDS.sleep(10);
             syncHashMap.put(key, value);
-        } finally {
+        }
+        catch(InterruptedException e) {}
+        finally {
             writeLock.unlock();
         }
     }
