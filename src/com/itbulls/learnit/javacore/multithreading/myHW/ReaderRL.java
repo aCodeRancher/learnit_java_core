@@ -17,6 +17,8 @@ public class ReaderRL {
 
     public void read(){
          while(!post.getDeleteFlag()) {
+             //The message has not been visited by this reader and
+             //it has not visited by all three readers, then read it.
              if (visit==0 && post.getReadCount()<3) {
                  try {
 
@@ -29,6 +31,7 @@ public class ReaderRL {
                      readLock.unlock();
                  }
              }
+             //if the message has already been visited by all three reader, then don't read it
              if (post.getReadCount()==3){
                  visit=0;
              }
