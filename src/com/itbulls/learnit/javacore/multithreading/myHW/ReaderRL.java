@@ -8,6 +8,7 @@ public class ReaderRL {
 
     private Post post;
 
+   private int visit= 0;
 
     public ReaderRL(ReentrantReadWriteLock lock, Post post){
         readLock = lock.readLock();
@@ -16,16 +17,21 @@ public class ReaderRL {
 
     public void read(){
          while(!post.getDeleteFlag()) {
-             try {
-                 readLock.lock();
-                 post.addReadCount();
-                 System.out.println(Thread.currentThread().getName() + " reads : " + post.getPost() + " " +
-                         "read count: " + post.getReadCount());
+             if (visit==0 && post.getReadCount()<3) {
+                 try {
 
-             } finally {
-                 readLock.unlock();
+                     readLock.lock();
+                     post.addReadCount();
+                     System.out.println(Thread.currentThread().getName() + " reads : " + post.getPost() + " " +
+                             "read count: " + post.getReadCount());
+                     visit++;
+                  } finally {
+                     readLock.unlock();
+                 }
+             }
+             if (post.getReadCount()==3){
+                 visit=0;
              }
          }
-
     }
 }
