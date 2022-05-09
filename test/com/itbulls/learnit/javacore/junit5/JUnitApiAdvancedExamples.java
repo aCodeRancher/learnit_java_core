@@ -95,7 +95,10 @@ public class JUnitApiAdvancedExamples {
 	@DisabledOnOs(OS.WINDOWS)
 	void notOnWindows() {
 	}
-	
+	@Test
+	@EnabledOnOs(OS.WINDOWS)
+	void  OnWindows() {
+	}
 	// **** JRE Conditions
 	
 	@Test
