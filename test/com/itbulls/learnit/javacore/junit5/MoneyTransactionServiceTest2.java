@@ -2,10 +2,11 @@ package com.itbulls.learnit.javacore.junit5;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.junit.jupiter.api.Assumptions.assumingThat;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -252,7 +253,7 @@ public class MoneyTransactionServiceTest2 {
 
 	@Test
     void testOnlyOnPiatakhaWorkstation() {
-		assumeTrue("truee".equals(System.getenv("IS_ANDRII_PIATAKHA_LAPTOP")), 
+		assumeTrue("true".equals(System.getenv("IS_ANDRII_PIATAKHA_LAPTOP")),
 				() -> "Aborting this test, because it is running not on "
 						+ "laptop of Andrii Piatakha");
 
@@ -282,17 +283,18 @@ public class MoneyTransactionServiceTest2 {
 	
 	
 	@ParameterizedTest
-	@NullSource
-	@EmptySource
+	//@NullSource
+	 //@EmptySource
 	@NullAndEmptySource
 	void nullAndEmptySources(String text) {
 		assertTrue(text == null || text.trim().isEmpty());
 	}
 
-	
+
 	@ParameterizedTest
 	@MethodSource("sourceMethod")
 	void testMethodSource(String arg) {
+
 		assertNotNull(arg);
 	}
 	
