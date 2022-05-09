@@ -11,4 +11,9 @@ public class TestCodeCoverageDemoTest {
 		testInstance.testCodeCoverage(null);
 	}
 
+	@Test
+	void testStringNotNull() {
+		testInstance.testCodeCoverage("hello");
+	}
+
 }
