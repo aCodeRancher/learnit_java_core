@@ -31,15 +31,15 @@ public class Task3 implements Runnable {
 		try {
 			
 			// uncomment this to synchronize access to this section
-//			synchronized (this) {
+ 			synchronized (this) {
 				while (true) {
-					System.out.println(counter1 + " == " + counter2);
+					System.out.println(Thread.currentThread().getName() + " "+ counter1 + " == " + counter2);
 					counter1++;
 					TimeUnit.MILLISECONDS.sleep(10);
 					counter2++;
 					TimeUnit.MILLISECONDS.sleep(10);
 				}
-//			}
+ 			}
 		} catch (InterruptedException e) {
 			System.out.println("Thread was interrupted");
 		}
